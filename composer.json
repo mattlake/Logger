@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Trunk\\Logger\\": "./src"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.3"
+    }
+}
