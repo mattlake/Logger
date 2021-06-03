@@ -4,3 +4,4 @@ docker-compose/
 vendor/
 phpunit.xml
 info.php
+log.txt
