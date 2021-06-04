@@ -21,4 +21,14 @@ class LoggerConfig
         LogLevel::NOTICE => true,
         LogLevel::WARNING => true,
     ];
+
+    public function enable(string $logLevel)
+    {
+        $this->activeLogLevels[$logLevel] = true;
+    }
+
+    public function disable(string $logLevel)
+    {
+        $this->activeLogLevels[$logLevel] = false;
+    }
 }
