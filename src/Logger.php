@@ -62,7 +62,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function log($level, $message, array $context = [])
     {
-        switch ($level){
+        switch ($level) {
             case LogLevel::EMERGENCY:
                 $this->emergency($message, $context);
                 break;
@@ -88,8 +88,7 @@ class Logger implements \Psr\Log\LoggerInterface
                 $this->debug($message, $context);
                 break;
             default:
-                throw new Psr\Log\InvalidArgumentException();
-
+                throw new \Psr\Log\InvalidArgumentException();
         }
     }
 }
