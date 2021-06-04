@@ -7,5 +7,5 @@ namespace Trunk\Logger;
 interface LogTypeInterface
 {
     public function __construct(string $parameter);
-    public function write(string $message);
+    public function emit(string $message, $context);
 }

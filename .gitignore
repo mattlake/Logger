@@ -5,3 +5,4 @@ vendor/
 phpunit.xml
 info.php
 log.txt
+.idea
