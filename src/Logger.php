@@ -8,14 +8,23 @@ use Psr\Log\LogLevel;
 
 class Logger implements \Psr\Log\LoggerInterface
 {
-    public function __construct(private LogTypeInterface $logger)
+    private array $logs = [];
+
+    public function __construct()
     {
     }
 
-    public function emergency($message, array $context = [])
+    public function addLog(LogTypeInterface $log): self
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        $this->logs[] = $log;
+        return $this;
+    }
+
+    public function emergency($message, array $context = []): void
+    {
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function alert($message, array $context = [])

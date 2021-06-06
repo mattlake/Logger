@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
+use Trunk\Logger\Logger;
+use Trunk\Logger\LoggerStream;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Instantiate logger
-$logger = new \Trunk\Logger\Logger(new \Trunk\Logger\LoggerStream('log.txt'));
+$logger = new Logger();
+$logger->addLog(new LoggerStream('log.txt'));
+$logger->addLog(new LoggerStream('log2.txt'));
 
-// Log Message
-$logger->emergency('Log my emergency!');
-$logger->alert('Log my alert!');
-$logger->critical('Log my critical!');
-$logger->error('Log my error!');
-$logger->info('Log my info!');
-$logger->debug('Log my debug!');
-$logger->notice('Log my notice!');
+$logger->emergency('This is an emergeency!!!');

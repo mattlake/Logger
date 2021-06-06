@@ -22,13 +22,20 @@ class LoggerConfig
         LogLevel::WARNING => true,
     ];
 
-    public function enable(string $logLevel)
+    public function enable(string $logLevel): self
     {
         $this->activeLogLevels[$logLevel] = true;
+        return $this;
     }
 
-    public function disable(string $logLevel)
+    public function disable(string $logLevel): self
     {
         $this->activeLogLevels[$logLevel] = false;
+        return $this;
+    }
+
+    public function isEnabled(string $logLevel): bool
+    {
+        return $this->activeLogLevels[$logLevel];
     }
 }
