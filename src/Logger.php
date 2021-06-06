@@ -29,44 +29,51 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function alert($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function critical($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function error($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function warning($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function notice($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function info($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function debug($message, array $context = [])
     {
-        // todo Is this log level active?
-        $this->logger->emit($message, $context);
+        foreach ($this->logs as $log) {
+            $log->emit($message, $context);
+        }
     }
 
     public function log($level, $message, array $context = [])
