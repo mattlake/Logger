@@ -9,6 +9,7 @@ use Psr\Log\LogLevel;
 class Logger implements \Psr\Log\LoggerInterface
 {
     private array $logs = [];
+    private array $customLogs = [];
 
     public function __construct()
     {
@@ -25,6 +26,8 @@ class Logger implements \Psr\Log\LoggerInterface
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
+
+        $this->handleCustomLogs(LogLevel::EMERGENCY);
     }
 
     public function alert($message, array $context = [])
@@ -105,6 +108,20 @@ class Logger implements \Psr\Log\LoggerInterface
                 break;
             default:
                 throw new \Psr\Log\InvalidArgumentException();
+        }
+    }
+
+    public function addCustomLog(string $logLevel, callable $closure): self
+    {
+        $this->customLogs[$logLevel][] = $closure;
+        return $this;
+    }
+
+    private function handleCustomLogs(string $logLevel)
+    {
+
+        foreach ($this->customLogs[$logLevel] as $callable) {
+            call_user_func($callable);
         }
     }
 }
