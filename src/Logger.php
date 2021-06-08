@@ -8,8 +8,8 @@ use Psr\Log\LogLevel;
 
 class Logger implements \Psr\Log\LoggerInterface
 {
-    private array $logs = [];
-    private array $customLogs = [];
+    public array $logs = [];
+    public array $customLogs = [];
 
     public function __construct()
     {
@@ -119,9 +119,10 @@ class Logger implements \Psr\Log\LoggerInterface
 
     private function handleCustomLogs(string $logLevel)
     {
-
-        foreach ($this->customLogs[$logLevel] as $callable) {
-            call_user_func($callable);
+        if (isset($this->customLogs[$logLevel])) {
+            foreach ($this->customLogs[$logLevel] as $callable) {
+                call_user_func($callable);
+            }
         }
     }
 }
