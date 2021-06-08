@@ -1,4 +1,16 @@
 {
+    "name" : "mattlake/logger",
+    "description": "A simple PSR-3 compliant logger",
+    "version": "0.0.1",
+    "keywords":["logging"],
+    "homepage":"https://github.com/mattlake/logger",
+    "authors": [
+        {
+            "name": "Matthew Lake",
+            "homepage": "http://www.matthewlake.co.uk",
+            "role":"Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Trunk\\Logger\\": "./src"
