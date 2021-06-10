@@ -30,56 +30,56 @@ class Logger implements \Psr\Log\LoggerInterface
         $this->handleCustomLogs(LogLevel::EMERGENCY);
     }
 
-    public function alert($message, array $context = [])
+    public function alert($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function critical($message, array $context = [])
+    public function critical($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function error($message, array $context = [])
+    public function error($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function warning($message, array $context = [])
+    public function warning($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function notice($message, array $context = [])
+    public function notice($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function info($message, array $context = [])
+    public function info($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function debug($message, array $context = [])
+    public function debug($message, array $context = []): void
     {
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
     }
 
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         switch ($level) {
             case LogLevel::EMERGENCY:
@@ -124,5 +124,14 @@ class Logger implements \Psr\Log\LoggerInterface
                 call_user_func($callable);
             }
         }
+    }
+
+    private function validateMessage(string|object $message)
+    {
+        if (!is_string($message) && (!is_object($message) || method_exists($message, '__toString'))) {
+            throw new \Exception('Message must be a string, or an object with a __toString() method');
+        }
+
+        return $message;
     }
 }
