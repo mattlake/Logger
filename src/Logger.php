@@ -23,6 +23,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function emergency($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -32,6 +33,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function alert($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -39,6 +41,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function critical($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -46,6 +49,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function error($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -53,6 +57,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function warning($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -60,6 +65,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function notice($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -67,6 +73,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function info($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -74,6 +81,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function debug($message, array $context = []): void
     {
+        $this->validateMessage($message);
         foreach ($this->logs as $log) {
             $log->emit($message, $context);
         }
@@ -81,6 +89,7 @@ class Logger implements \Psr\Log\LoggerInterface
 
     public function log($level, $message, array $context = []): void
     {
+        $this->validateMessage($message);
         switch ($level) {
             case LogLevel::EMERGENCY:
                 $this->emergency($message, $context);
@@ -126,12 +135,12 @@ class Logger implements \Psr\Log\LoggerInterface
         }
     }
 
-    private function validateMessage(string|object $message)
+    private function validateMessage($message): bool
     {
-        if (!is_string($message) && (!is_object($message) || method_exists($message, '__toString'))) {
+        if (!is_string($message) && (!is_object($message) || !method_exists($message, '__toString'))) {
             throw new \Exception('Message must be a string, or an object with a __toString() method');
         }
 
-        return $message;
+        return true;
     }
 }
