@@ -19,13 +19,13 @@ it('cam add a custom closure', function () {
     $this->assertArrayHasKey('emergency', $logger->customLogs);
 });
 
-it('throws an exception if the message is neither a string or object', function () {
+it('throws an exception if the message is an array', function () {
     $logger = new Logger();
     $logFile = './testlog.txt';
     $logger->addLog(new LoggerStream($logFile));
 
     $this->expectException(\Exception::class);
-    $logger->emergency(false);
+    $logger->emergency(array());
     unlink($logFile);
 });
 

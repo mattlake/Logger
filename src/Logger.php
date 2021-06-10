@@ -135,12 +135,12 @@ class Logger implements \Psr\Log\LoggerInterface
         }
     }
 
-    private function validateMessage($message): bool
+    private function validateMessage(&$message): string
     {
-        if (!is_string($message) && (!is_object($message) || !method_exists($message, '__toString'))) {
+        if (is_array($message) || (is_object($message) && !method_exists($message, '__toString'))) {
             throw new \Exception('Message must be a string, or an object with a __toString() method');
         }
 
-        return true;
+        return (string)$message;
     }
 }
