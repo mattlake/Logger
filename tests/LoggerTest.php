@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/TestClass.php';
+
 use Trunk\Logger\Logger;
 use Trunk\Logger\LoggerStream;
 
@@ -35,5 +37,15 @@ it('throws an exception if the message is an object without a __toString method'
     $testClass = new stdClass();
     $this->expectException(\Exception::class);
     $logger->emergency($testClass);
+    unlink($logFile);
+});
+
+it('logs correctly if object with __toString method is passed as an argument', function () {
+    $logger = new Logger();
+    $logFile = './testlog.txt';
+    $logger->addLog(new LoggerStream($logFile));
+    $testClass = new TestClass();
+    $logger->emergency($testClass);
+    $this->assertTrue(file_exists($logFile));
     unlink($logFile);
 });

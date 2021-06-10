@@ -11,7 +11,7 @@ class LoggerStream implements LogTypeInterface
     {
     }
 
-    public function emit(string $message, $context): void
+    public function emit($message, $context): void
     {
         $stream = fopen($this->filepath, 'a');
 
