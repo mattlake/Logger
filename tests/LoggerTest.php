@@ -9,7 +9,7 @@ it('can be instantiated', function () {
     $this->assertInstanceOf(Logger::class, new Logger());
 });
 
-it('cam add a custom closure', function () {
+it('can add a custom closure', function () {
     $logger = new Logger();
     $logger->addCustomLog('emergency', function () {
         echo 'this is a custom log';
@@ -47,5 +47,19 @@ it('logs correctly if object with __toString method is passed as an argument', f
     $testClass = new TestClass();
     $logger->emergency($testClass);
     $this->assertTrue(file_exists($logFile));
+    unlink($logFile);
+});
+
+it('correctly interpolates a message with variables', function () {
+    $logger = new Logger();
+    $logFile = './testlog.txt';
+    $logger->addLog(new LoggerStream($logFile));
+
+    $message = "Hi, my name is {name}";
+    $context = ['name' => 'Matt'];
+    $expected = 'Hi, my name is Matt';
+
+    $logger->emergency($message, $context);
+    $this->assertSame($expected, trim(file_get_contents($logFile)));
     unlink($logFile);
 });
